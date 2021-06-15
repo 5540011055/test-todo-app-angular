@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo } from './../../models/todo';
+//import { Todo } from './../../models/todo';
+import { ApiService } from '../../service/api.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-todo',
@@ -7,30 +9,38 @@ import { Todo } from './../../models/todo';
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit {
+  h1 = "Todo List";
+  todoForm : FormGroup;
 
   txtPh = "Please enter todo.";
   txtSubmit = "Add Todo";
-  nameTodo: string = "";
-  todos: Todo[] = [];
 
-  constructor() { }
+  data:Array<any> | undefined
+
+  constructor (private Api: ApiService,private fb: FormBuilder){
+    this.data = new Array<any>()
+
+    this.todoForm = this.fb.group({
+      title: [''],
+      userId: ['']
+    });
+    this.todoForm.valueChanges.subscribe(console.log);
+
+  
+  }
 
   ngOnInit(): void {
-    this.todos = [{
-      content: "Work 1",
-      completed: true
-    }, {
-      content: "Work 2",
-      completed: false
-    }, {
-      content: "Work 3",
-      completed: false
-    }]
+    this.Api.getDataTodo().subscribe((resp) => {
+      //console.log(resp);
+      this.data = resp;
+      console.log(this.data
+        );
+    });
   }
 
   toggleDone(id: number) {
     console.log("Click : " + id);
-    this.todos.map((v, i) => {
+    this.data?.map((v, i) => {
       if (i == id) v.completed = !v.completed;
 
       return v;
@@ -38,14 +48,16 @@ export class TodoComponent implements OnInit {
   }
 
   deleteTodo(id: number) {
-    this.todos = this.todos.filter((v, i) => i !== id);
+    this.data = this.data?.filter((v, i) => i !== id);
   }
 
   addTodo() {
-    this.todos.push({
-      content: this.nameTodo,
-      completed: false
-    }); 
+    console.log(this.todoForm.controls.value);
+    // this.todos.concat(this.todoForm.value);
+    this.data?.push({
+      userId: this.todoForm.controls['userId'].value,
+      title: this.todoForm.controls['title'].value
+    });
   }
 
 

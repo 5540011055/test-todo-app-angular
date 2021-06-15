@@ -1,16 +1,28 @@
+<header>
+    <h1>{{ h1 }}</h1>
+</header>
 <div class="card">
     <div class="card-body">
         <div class="todos">
-            <form (submit)="addTodo()">
-                <input type="text" name="nameTodo" placeholder="{{ txtPh }}" class="form-control"
-                    [(ngModel)]="nameTodo" />
-                <button type="submit" class="todo-submit"> {{ txtSubmit }} </button>
+
+            <form (submit)="addTodo()" [formGroup]="todoForm" style="display: flex; flex-direction: column; row-gap: 0.5em;">
+                Value: {{ todoForm.value | json }}
+                <hr>
+                <input type="text" name="title" placeholder="{{ txtPh }}" class="form-control"
+                formControlName="title"  required />
+                <input type="text" name="userId" placeholder="" class="form-control" 
+                formControlName="userId" required />
+               
+                <button type="submit" class="todo-submit btn"> {{ txtSubmit }} </button>
             </form>
-            <div *ngFor="let item of todos; let i = index;" class="todo {{ (item.completed ? 'done' : '') }}">
+
+            <div *ngFor="let arr of data; let i =index;" (click)="toggleDone(i)" class="todo {{ (arr.completed ? 'done' : '') }}">
                 <div class="id">{{ i+1 }}</div>
-                <div class="content" (click)="toggleDone(i)">{{ item.content }}</div>
+                <div class="content">{{ arr.title }}</div>
+                <div class="time">{{ arr.userId }}</div>
                 <button class="delete btn btn-danger" (click)="deleteTodo(i)">Remove</button>
             </div>
+
         </div>
     </div>
 </div>
