@@ -12,7 +12,8 @@ export class TodoComponent implements OnInit {
   h1 = "Todo List";
   todoForm : FormGroup;
 
-  txtPh = "Please enter todo.";
+  txtPh = "Please enter name todo.";
+  txtId = "Please enter User id.";
   txtSubmit = "Add Todo";
 
   data:Array<any> | undefined
