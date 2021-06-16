@@ -1,0 +1,8 @@
+<div class="id aaa">{{ item.id }}</div>
+<div class="content {{ (item.completed ? 'done' : '') }}" >{{ item.title }}</div>
+<div class="user-id">User  {{ item.userId }}</div>
+<button class="delete btn btn-danger" (click)="deleteTodo(i)" >Remove</button>
+
+<p style="display: none;">
+    {{ item | json }}
+</p>

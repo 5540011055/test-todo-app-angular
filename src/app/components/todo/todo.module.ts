@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule  } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TodoItemComponent } from '../todo-item/todo-item.component';
+
 //import { ApiService } from '../../service/api.service';
 @NgModule({
   imports: [
@@ -15,9 +17,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    //TodoItemComponent
     //ApiService
   ],
-  declarations: [TodoComponent]
+  declarations: [TodoComponent, TodoItemComponent]
 })
 export class TodoModule { }
 

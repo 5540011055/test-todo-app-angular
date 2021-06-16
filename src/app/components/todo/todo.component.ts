@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class TodoComponent implements OnInit {
   h1 = "Todo List";
   todoForm : FormGroup;
-
+  currentItem = "test";
   txtPh = "Please enter name todo.";
   txtId = "Please enter User id.";
   txtSubmit = "Add Todo";
@@ -39,6 +39,19 @@ export class TodoComponent implements OnInit {
     });
   }
 
+  addTodo() {
+    console.log(this.todoForm.controls.value);
+    // this.todos.concat(this.todoForm.value);
+    this.data?.push({
+      userId: this.todoForm.controls['userId'].value,
+      title: this.todoForm.controls['title'].value
+    });
+  }
+
+  // deleteTodo(id: number) {
+  //   this.data = this.data?.filter((v, i) => i !== id);
+  // }
+
   toggleDone(id: number) {
     console.log("Click : " + id);
     this.data?.map((v, i) => {
@@ -48,17 +61,10 @@ export class TodoComponent implements OnInit {
     })
   }
 
-  deleteTodo(id: number) {
+  onChange(id : number){
+    //alert(id);
     this.data = this.data?.filter((v, i) => i !== id);
-  }
-
-  addTodo() {
-    console.log(this.todoForm.controls.value);
-    // this.todos.concat(this.todoForm.value);
-    this.data?.push({
-      userId: this.todoForm.controls['userId'].value,
-      title: this.todoForm.controls['title'].value
-    });
+    console.log('new data',this.data);
   }
 
 

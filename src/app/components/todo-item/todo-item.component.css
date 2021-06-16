@@ -1,0 +1,16 @@
+ .id {
+	flex: 1 1 50px;
+}
+
+ .content {
+	flex: 1 1 100%;
+    cursor: pointer;
+}
+
+.user-id{
+    flex: 1 1 10%;
+}
+
+.content.done  {
+	text-decoration: line-through;
+}

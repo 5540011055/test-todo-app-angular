@@ -13,22 +13,6 @@
 	border-bottom: 0;
 }
 
-.todo .id {
-	flex: 1 1 50px;
-}
-
-.todo .content {
-	flex: 1 1 90%;
-    cursor: pointer;
-}
-.todo .time {
-	flex: 1 0 10%;
-}
-
-.todo.done .content {
-	text-decoration: line-through;
-}
-
 .todo-input {
 	display: block;
 	width: 100%;
